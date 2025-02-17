@@ -1,0 +1,48 @@
+---
+import PRDWithCookies from '../prd';
+
+const prdKey = 'my_prd_key';
+const prd = new PRDWithCookies(0.2, prdKey);
+
+let dropped = false;
+if (new URL(Astro.request.url).searchParams.get('reset') === 'true') {
+    prd.reset(Astro);
+} else {
+    dropped = prd.next(Astro);
+}
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Astro PRD with Cookies</title>
+    </head>
+
+    <body>
+        <h1>Astro PRD is now with cookies!</h1>
+
+        {
+            dropped ? (
+                <p>Congratulations! A drop occurred. Server rendering is amazing!</p>
+            ) : (
+                <p>No drop this time. The next time will be better!</p>
+            )
+        }
+
+        <a href="/cookiePrd?reset=true">Reset PRD</a>
+
+        <style>
+            a {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 8px 16px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+            }
+        </style>
+    </body>
+</html>

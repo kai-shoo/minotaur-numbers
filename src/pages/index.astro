@@ -1,0 +1,25 @@
+---
+import RandomLayout from '../layouts/RandomLayout.astro';
+import { getRandomNumber } from '../utils'
+---
+
+<RandomLayout>
+  <main>
+    <div class="number">{getRandomNumber()}</div>
+  </main>
+</RandomLayout>
+
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+  }
+
+  .number {
+    font-size: 8rem;
+    font-weight: bold;
+  }
+</style>
