@@ -1,48 +1,48 @@
 ---
-import PRDWithCookies from '../prd';
+import PRDWithCookies from '../prd'
+import SimpleBackground from '../templates/SimpleBackground.astro'
+import TemplateA from '../templates/template-a.astro'
+import { getRandomElement } from '../utils'
 
-const prdKey = 'my_prd_key';
-const prd = new PRDWithCookies(0.2, prdKey);
+const TIERS = { S: 'S', A: 'A', F: 'F' }
 
-let dropped = false;
-if (new URL(Astro.request.url).searchParams.get('reset') === 'true') {
-    prd.reset(Astro);
-} else {
-    dropped = prd.next(Astro);
+const TIER_LIST = new Map([
+  [TIERS.S, [TemplateA]],
+  [TIERS.A, [TemplateA]],
+  [TIERS.F, [SimpleBackground]],
+])
+
+const DROP_RATE = {
+  [TIERS.S]: 0.1,
+  [TIERS.A]: 0.3,
 }
+
+let selectedTier = TIERS.F
+for (const [key] of TIER_LIST) {
+  if (key === TIERS.F) continue
+
+  const prd = new PRDWithCookies(DROP_RATE[key], key)
+  const hasWon = prd.next(Astro)
+
+  if (hasWon) {
+    selectedTier = key;
+    break
+  }
+}
+
+const SelectedTemplateComponent = getRandomElement(TIER_LIST.get(selectedTier))
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Astro PRD with Cookies</title>
-    </head>
-
-    <body>
-        <h1>Astro PRD is now with cookies!</h1>
-
-        {
-            dropped ? (
-                <p>Congratulations! A drop occurred. Server rendering is amazing!</p>
-            ) : (
-                <p>No drop this time. The next time will be better!</p>
-            )
-        }
-
-        <a href="/cookiePrd?reset=true">Reset PRD</a>
-
-        <style>
-            a {
-                display: inline-block;
-                margin-top: 10px;
-                padding: 8px 16px;
-                background-color: #007bff;
-                color: white;
-                text-decoration: none;
-                border-radius: 4px;
-            }
-        </style>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Astro PRD with Cookies</title>
+  </head>
+  <body>
+    <SelectedTemplateComponent>
+      <slot />
+    </SelectedTemplateComponent>
+  </body>
 </html>

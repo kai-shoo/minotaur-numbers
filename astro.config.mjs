@@ -1,13 +1,13 @@
-import { defineConfig } from 'astro/config';
-import node from '@astrojs/node';
-import netlify from '@astrojs/netlify/functions';
+import { defineConfig } from 'astro/config'
+import node from '@astrojs/node'
+import netlify from '@astrojs/netlify/functions'
 
 export default defineConfig({
   vite: {
     css: {
-      transformer: "lightningcss",
+      transformer: 'lightningcss',
     },
   },
   output: 'server',
-  adapter: netlify()
-});
+  adapter: netlify(),
+})
