@@ -3,13 +3,14 @@ import PRDWithCookies from '../prd'
 import SimpleBackground from '../templates/SimpleBackground.astro'
 import TemplateA from '../templates/template-a.astro'
 import { getRandomElement } from '../utils'
+import SimpleVideo from '../templates/SimpleVideo.astro'
 
 const TIERS = { S: 'S', A: 'A', F: 'F' }
 
 const TIER_LIST = new Map([
   [TIERS.S, [TemplateA]],
   [TIERS.A, [TemplateA]],
-  [TIERS.F, [SimpleBackground]],
+  [TIERS.F, [SimpleBackground, SimpleVideo]],
 ])
 
 const DROP_RATE = {
