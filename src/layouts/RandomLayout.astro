@@ -7,6 +7,8 @@ import SimpleVideo from '../templates/SimpleVideo.astro'
 import Mountains from '../templates/Mountains.astro'
 import DVD from '../templates/DVD.astro'
 
+const tempArray = [Mountains, DVD, SimpleBackground, SimpleVideo]
+
 const TIERS = { S: 'S', A: 'A', F: 'F' }
 
 const TIER_LIST = new Map([
@@ -33,7 +35,8 @@ for (const [key] of TIER_LIST) {
   }
 }
 
-const SelectedTemplateComponent = getRandomElement(TIER_LIST.get(selectedTier))
+// const SelectedTemplateComponent = getRandomElement(TIER_LIST.get(selectedTier))
+const SelectedTemplateComponent = getRandomElement(tempArray)
 ---
 
 <!doctype html>
