@@ -1,7 +1,7 @@
 ---
 import { getRandomElement } from '../utils'
 
-const BACKGROUNDS = ['https://images.alphacoders.com/907/90731.jpg']
+const BACKGROUNDS = ['/images/goida.jpeg', '/images/women-cat-japanese.webp']
 
 const background = getRandomElement(BACKGROUNDS)
 ---
@@ -17,8 +17,10 @@ const background = getRandomElement(BACKGROUNDS)
   .numbers {
     font-family: 'Libre Caslon Text', sans-serif;
     padding: 20px;
+    font-size: 25vw;
     color: white;
-
+    -webkit-text-stroke: 3px black;
+    text-stroke: 3px black;
   }
   .background-image {
     width: 100%;

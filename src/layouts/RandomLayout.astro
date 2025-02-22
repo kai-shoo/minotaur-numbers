@@ -4,12 +4,14 @@ import SimpleBackground from '../templates/SimpleBackground.astro'
 import TemplateA from '../templates/template-a.astro'
 import { getRandomElement } from '../utils'
 import SimpleVideo from '../templates/SimpleVideo.astro'
+import Mountains from '../templates/Mountains.astro'
+import DVD from '../templates/DVD.astro'
 
 const TIERS = { S: 'S', A: 'A', F: 'F' }
 
 const TIER_LIST = new Map([
-  [TIERS.S, [TemplateA]],
-  [TIERS.A, [TemplateA]],
+  [TIERS.S, [Mountains]],
+  [TIERS.A, [DVD]],
   [TIERS.F, [SimpleBackground, SimpleVideo]],
 ])
 
@@ -26,7 +28,7 @@ for (const [key] of TIER_LIST) {
   const hasWon = prd.next(Astro)
 
   if (hasWon) {
-    selectedTier = key;
+    selectedTier = key
     break
   }
 }

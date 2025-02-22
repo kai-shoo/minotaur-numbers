@@ -1,0 +1,68 @@
+---
+// src/pages/index.astro
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DVD Bouncing</title>
+    <style>
+      :root {
+        --width: 200px;
+        --height: calc(var(--width) / 2);
+      }
+
+      body {
+        background-color: black;
+        margin: 0;
+        overflow: hidden;
+        min-height: 100vh;
+      }
+
+      .dvd-logo {
+        border: 1px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 60px;
+        width: var(--width);
+        height: var(--height);
+        background-size: contain;
+        background-repeat: no-repeat;
+        position: absolute;
+        animation:
+          moveX 6.8s linear infinite alternate,
+          moveY 17s linear infinite alternate;
+      }
+
+      @keyframes moveX {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: calc(100% - var(--width));
+        }
+      }
+
+      @keyframes moveY {
+        0% {
+          top: 0;
+        }
+        50% {
+          top: calc(100vh - var(--height));
+        }
+        100% {
+          top: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dvd-logo">
+      <slot />
+    </div>
+  </body>
+</html>

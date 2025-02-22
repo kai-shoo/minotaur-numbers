@@ -1,0 +1,184 @@
+---
+// MountainScene.astro
+---
+
+<div class="container">
+  <div class="big-number">
+    <slot />
+  </div>
+
+  <div class="sunrise">
+    <div class="sun"></div>
+    <div class="star" id="ray"></div>
+  </div>
+
+  <svg class="mountains" width="100%" viewBox="0 0 2000 400">
+    <defs>
+      <filter id="fireblur" x="0" y="0">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3"></feGaussianBlur>
+      </filter>
+      <linearGradient id="firegradient">
+        <stop offset="5%" stop-color="#fd4"></stop>
+        <stop offset="95%" stop-color="red"></stop>
+      </linearGradient>
+      <linearGradient id="water">
+        <stop offset="5%" stop-color="#CBA8C2"></stop>
+        <stop offset="95%" stop-color="#46B0EA"></stop>
+      </linearGradient>
+    </defs>
+    <g id="mounts">
+      <path
+        class="mount1"
+        d="M0 275 150 250 550 100 800 250 1200 150 1500 25 2000 300 2000 400 0 400"
+      ></path>
+      <path class="snow" d="M 495 120 550 100 600 130 575 125 550 130 535 115"
+      ></path>
+      <path class="snow" d="M 1380 75 1500 25 1635 100 1550 75 1500 85 1450 75"
+      ></path>
+      <path
+        class="mount3"
+        d="M0 350 350 225 500 300 800 200 1000 275 1250 200 1500 250 1850 175 2000 250 2000 400 0 400"
+      ></path>
+      <path class="mount2" d="M0 400 650 250 900 300 1550 250 2000 300 2000 400"
+      ></path>
+      <path
+        class="mount4"
+        d="M0 350 450 300 800 350 1200 300 1500 350 1750 275 2000 200 2000 400 0 400"
+      ></path>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .container {
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    background: radial-gradient(at bottom, #bd76a8 30%, #46b0ea 100%);
+  }
+
+  .big-number {
+    position: absolute;
+    font-weight: bold;
+    font-size: 45vw; /* 1.5 times bigger than original 25vw */
+    font-family: Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.3);
+    user-select: none;
+    z-index: 1;
+    bottom: -2vw; /* moved lower */
+    left: 50%; /* centered */
+    transform: translateX(-50%); /* perfect centering */
+  }
+
+  .mountains {
+    position: absolute;
+    z-index: 2;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    /* opacity: 0.95; */
+  }
+
+  .mount1 {
+    fill: #1b6180;
+  }
+  .mount2 {
+    fill: #124156;
+  }
+  .mount3 {
+    fill: #17516b;
+  }
+  .mount4 {
+    fill: #0e3141;
+  }
+  .snow {
+    fill: white;
+  }
+
+  .sunrise {
+    position: absolute;
+    z-index: 1;
+    bottom: 15vh;
+    left: 50%;
+    margin-left: -100px;
+    animation: pulse 5s linear infinite;
+  }
+
+  .sun {
+    width: 200px;
+    height: 200px;
+    background: #fffff3;
+    border-radius: 50%;
+    filter: blur(25px);
+    opacity: 0.75;
+  }
+
+  .star {
+    position: absolute;
+    bottom: -50px;
+    left: -50px;
+    width: 300px;
+    height: 300px;
+    background: #fff;
+    opacity: 0.025;
+    clip-path: polygon(
+      100% 0,
+      58% 50%,
+      100% 100%,
+      50% 58%,
+      0 100%,
+      48% 50%,
+      0 0,
+      50% 48%
+    );
+  }
+
+  #ray {
+    transform: rotate(60deg);
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.1, 1.1);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  @media screen and (max-width: 1280px) {
+    .sunrise {
+      bottom: 5vh;
+    }
+    .sun {
+      transform: scale(0.6, 0.6);
+    }
+    .star {
+      width: 150px;
+      height: 150px;
+      bottom: 30px;
+      left: 30px;
+    }
+    .mountains {
+      width: 150%;
+    }
+  }
+
+  @media screen and (max-width: 760px) {
+    .sunrise {
+      bottom: 2vh;
+    }
+    .mountains {
+      width: 200%;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .sunrise {
+      bottom: 1vh;
+    }
+  }
+</style>

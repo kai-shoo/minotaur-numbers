@@ -1,7 +1,10 @@
 ---
 import { getRandomElement } from '../utils'
 
-const BACKGROUND_VIDEOS = ['/videos/shni-shna-shnapi-rabbit.mp4', '/videos/shni-shna-shnapi-rabbit.mp4']
+const BACKGROUND_VIDEOS = [
+  '/videos/shni-shna-shnapi-rabbit.mp4',
+  '/videos/shni-shna-shnapi-rabbit.mp4',
+]
 
 const backgroundVideo = getRandomElement(BACKGROUND_VIDEOS)
 ---
@@ -15,19 +18,26 @@ const backgroundVideo = getRandomElement(BACKGROUND_VIDEOS)
     src: url('/fonts/libre-caslon-text-v5-latin-regular.woff2') format('woff2');
   }
   .numbers {
-    font-family: 'Libre Caslon Text', sans-serif;
-    padding: 20px;
-    position: relative;
-    z-index: 2;
-    background-color: #fff;
-    mix-blend-mode: screen;
-    font-weight: 800;
-    font-size: 50vh;
-    font-family: sans-serif;
+    font-family:
+      'Roboto Black', sans-serif; /* Or your preferred bold, readable font */
+    font-weight: 900;
+    font-size: 20vw; /* Scalable, as requested - keep this */
     text-transform: uppercase;
     text-align: center;
     word-break: break-all;
     padding: 1vh 1vw;
+    width: 100%;
+    color: white; /* Strong, basic white */
+    position: relative;
+    z-index: 2;
+
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black - crucial */
+    background-image: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(0, 0, 0, 0.08) 100%
+    );
+    background-size: 4px 4px; /* Adjust for noise grain size */
   }
   .background-video-container {
     width: 100%;
@@ -50,14 +60,8 @@ const backgroundVideo = getRandomElement(BACKGROUND_VIDEOS)
 </style>
 
 <div class="background-video-container">
-  <video 
-    class="background-video" 
-    autoplay 
-    loop 
-    muted 
-    playsinline
-  >
-    <source src={backgroundVideo} type="video/mp4">
+  <video class="background-video" autoplay loop muted playsinline>
+    <source src={backgroundVideo} type="video/mp4" />
   </video>
   <div class="numbers">
     <slot />
